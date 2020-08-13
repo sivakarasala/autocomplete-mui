@@ -79,6 +79,11 @@ export default function MultilineTextFields() {
     }
     setShowOptions(false);
   };
+
+  const handleMenuItemClick = (event, index) => {
+    setCurrency(() => options[index].value);
+    setShowOptions(false);
+  };
   return (
     <div style={{ padding: "4em" }}>
       <TextField
@@ -110,8 +115,12 @@ export default function MultilineTextFields() {
           <ClickAwayListener onClickAway={handleClickAway}>
             <Fade {...TransitionProps} timeout={350}>
               <Paper>
-                {options.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
+                {options.map((option, index) => (
+                  <MenuItem
+                    key={option.value}
+                    value={option.value}
+                    onClick={(event) => handleMenuItemClick(event, index)}
+                  >
                     {option.label}
                   </MenuItem>
                 ))}
