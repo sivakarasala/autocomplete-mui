@@ -103,6 +103,7 @@ export default function AutoComplete() {
         label="Primary Phone"
         value={currency}
         onChange={handleChange}
+        variant="outlined"
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
