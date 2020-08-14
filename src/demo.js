@@ -9,35 +9,43 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import MenuList from "@material-ui/core/MenuList";
 
 const currencies = [
   {
-    value: "USD",
-    label: "$ - US Dollar"
+    value: "3142003040",
+    label: "314-200-3040"
   },
   {
-    value: "EUR",
-    label: "€ - Euro"
+    value: "2018589645",
+    label: "201-858-9645"
   },
   {
-    value: "BTC",
-    label: "฿ - Bitcoin"
+    value: "9467378109",
+    label: "946-737-8109"
   },
   {
-    value: "JPY",
-    label: "¥ - Japanese Yen"
+    value: "8596259975",
+    label: "859-625-9975"
   }
 ];
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: "25ch"
-    }
-  }
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     "& .MuiTextField-root": {
+//       margin: theme.spacing(1),
+//       width: "25ch"
+//     }
+//   }
+// }));
+
+// function formatPhoneNumber(phoneNumberString) {
+//   var cleaned = ("" + phoneNumberString).replace(/\D/g, "");
+//   var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+//   if (match) {
+//     return "(" + match[1] + ") " + match[2] + "-" + match[3];
+//   }
+//   return null;
+// }
 
 export default function MultilineTextFields() {
   // const classes = useStyles();
@@ -80,13 +88,19 @@ export default function MultilineTextFields() {
     }
     setShowOptions(false);
   };
-  console.log(showOptions, "siv aisva");
+
+  const handleMenuItemClick = (event, index) => {
+    setCurrency(() => options[index].value);
+    setShowOptions(false);
+  };
+
+  // const formattedValue = formatPhoneNumber(currency);
   return (
     <div style={{ padding: "4em" }}>
       <TextField
         ref={inputRef}
         id="standard-select-currency"
-        label="Select"
+        label="Primary Phone"
         value={currency}
         onChange={handleChange}
         InputProps={{
@@ -112,8 +126,12 @@ export default function MultilineTextFields() {
           <ClickAwayListener onClickAway={handleClickAway}>
             <Fade {...TransitionProps} timeout={350}>
               <Paper>
-                {options.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
+                {options.map((option, index) => (
+                  <MenuItem
+                    key={option.value}
+                    value={option.value}
+                    onClick={(event) => handleMenuItemClick(event, index)}
+                  >
                     {option.label}
                   </MenuItem>
                 ))}
