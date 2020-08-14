@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Popper from "@material-ui/core/Popper";
@@ -12,33 +12,42 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 const currencies = [
   {
-    value: "USD",
-    label: "$ - US Dollar"
+    value: "3142003040",
+    label: "314-200-3040"
   },
   {
-    value: "EUR",
-    label: "€ - Euro"
+    value: "2018589645",
+    label: "201-858-9645"
   },
   {
-    value: "BTC",
-    label: "฿ - Bitcoin"
+    value: "9467378109",
+    label: "946-737-8109"
   },
   {
-    value: "JPY",
-    label: "¥ - Japanese Yen"
+    value: "8596259975",
+    label: "859-625-9975"
   }
 ];
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: "25ch"
-    }
-  }
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     "& .MuiTextField-root": {
+//       margin: theme.spacing(1),
+//       width: "25ch"
+//     }
+//   }
+// }));
 
-export default function MultilineTextFields() {
+// function formatPhoneNumber(phoneNumberString) {
+//   var cleaned = ("" + phoneNumberString).replace(/\D/g, "");
+//   var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+//   if (match) {
+//     return "(" + match[1] + ") " + match[2] + "-" + match[3];
+//   }
+//   return null;
+// }
+
+export default function AutoComplete() {
   // const classes = useStyles();
   const [currency, setCurrency] = React.useState(() => currencies[0].value);
   const [showOptions, setShowOptions] = React.useState(false);
@@ -84,12 +93,14 @@ export default function MultilineTextFields() {
     setCurrency(() => options[index].value);
     setShowOptions(false);
   };
+
+  // const formattedValue = formatPhoneNumber(currency);
   return (
     <div style={{ padding: "4em" }}>
       <TextField
         ref={inputRef}
         id="standard-select-currency"
-        label="Select"
+        label="Primary Phone"
         value={currency}
         onChange={handleChange}
         InputProps={{
