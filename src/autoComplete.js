@@ -10,7 +10,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
-const currencies = [
+const data = [
   {
     value: "3142003040",
     label: "314-200-3040"
@@ -49,34 +49,34 @@ const currencies = [
 
 export default function AutoComplete() {
   // const classes = useStyles();
-  const [currency, setCurrency] = React.useState(() => currencies[0].value);
+  const [value, setValue] = React.useState(() => data[0].value);
   const [showOptions, setShowOptions] = React.useState(false);
-  const [options, setOptions] = React.useState(() => currencies);
+  const [listOptions, setListOptions] = React.useState(() => data);
   const inputRef = React.useRef(null);
   const handleChange = (event) => {
     event.preventDefault();
     const value = event.target.value;
     const filteredOptions = getFilteredOptions(value);
     if (filteredOptions.length > 0 && value.trim() !== "") {
-      setOptions(() => filteredOptions);
+      setListOptions(() => filteredOptions);
       setShowOptions(() => true);
-      setCurrency(event.target.value);
+      setValue(event.target.value);
     } else if (filteredOptions.length === 0 && value.trim() !== "") {
       setShowOptions(() => false);
-      setOptions(() => currencies);
-      setCurrency(event.target.value);
+      setListOptions(() => data);
+      setValue(event.target.value);
     } else if (filteredOptions.length >= 0 && value.trim() === "") {
       setShowOptions(() => true);
-      setOptions(() => currencies);
-      setCurrency(event.target.value);
+      setListOptions(() => data);
+      setValue(event.target.value);
     } else {
       setShowOptions(() => false);
-      setCurrency(event.target.value);
+      setValue(event.target.value);
     }
   };
 
   const getFilteredOptions = (value) =>
-    currencies.filter((option) => option.value.trim().includes(value.trim()));
+    data.filter((option) => option.value.trim().includes(value.trim()));
 
   const handleToggle = () => {
     setShowOptions((prevOpen) => !prevOpen);
@@ -90,7 +90,7 @@ export default function AutoComplete() {
   };
 
   const handleMenuItemClick = (event, index) => {
-    setCurrency(() => options[index].value);
+    setValue(() => listOptions[index].value);
     setShowOptions(false);
   };
 
@@ -101,7 +101,7 @@ export default function AutoComplete() {
         ref={inputRef}
         id="standard-select-currency"
         label="Primary Phone"
-        value={currency}
+        value={value}
         onChange={handleChange}
         variant="outlined"
         InputProps={{
@@ -127,7 +127,7 @@ export default function AutoComplete() {
           <ClickAwayListener onClickAway={handleClickAway}>
             <Fade {...TransitionProps} timeout={350}>
               <Paper>
-                {options.map((option, index) => (
+                {listOptions.map((option, index) => (
                   <MenuItem
                     key={option.value}
                     value={option.value}
