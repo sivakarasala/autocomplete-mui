@@ -100,7 +100,7 @@ export default function AutoComplete() {
       <TextField
         ref={inputRef}
         id="standard-select-currency"
-        label="Primary Phone"
+        label="*Call First"
         value={value}
         onChange={handleChange}
         variant="outlined"
